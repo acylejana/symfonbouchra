@@ -2,6 +2,9 @@
 
  namespace App\Controller;
 
+use App\Entity\Message;
+use App\Form\DemoType;
+use App\Form\FormulaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +26,15 @@ class DemoController extends AbstractController
             'controller_name' => 'DemoController',
         ]);
     }
+    public function message(): Response
+    {
+        $message = new Message();
+        $form = $this->createForm(FormulaireType::class,$message);
+        return $this->render('demo/formulaire.html.twig', [
+            'formulaire' => $form->createView(),
+        ]);
+    }
+
     public function damier(): Response
     {
         $ligne =8;
